@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver - Rupesh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="./pastime.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full">
+        <div class="mx-12 pt-4 flex justify-center flex-col items-center">
+            <h1 class="text-center text-4xl">Sudoku Solver</h1>
+            <div class="w-[95%] h-[1px] bg-lightGray text-center self-center mt-4"></div>
+            
+            <div class="flex mt-4 w-full h-full justify-between flex-col lg:flex-row">
+                <!-- left part -->
+                <div class="box border-gray-800  grid grid-cols-9 p-5 self-center mainbox">
+                    <div class="box-c-1">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 0"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 1"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2 shadow-black shadow-sm mt-[2px] 2"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 3"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 4"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 5"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 6"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 7"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 8"></div>
+                    </div>
+                    <div class="box-c-2 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 9"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 10"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2 shadow-black shadow-sm mt-[2px] 11"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 12"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 13"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 14"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 15"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 16"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 17"></div>
+                    </div>
+                    <div class="box-c-3 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm 18"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 19"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 20"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 21"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 22"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 23"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 24"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 25"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 26"></div>
+                    </div>
+                    <div class="box-c-4 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 27"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 28"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 29"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 30"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 31"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 32"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 33"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 34"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 35"></div>
+                    </div>
+                    <div class="box-c-5 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 36"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 37"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 38"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 39"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 40"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 41"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 42"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 43"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 44"></div>
+                    </div>
+                    <div class="box-c-6 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm 45"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 46"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 47"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 48"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 49"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 50"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 51"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 52"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 53"></div>
+                    </div>
+                    <div class="box-c-7 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 54"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 55"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 56"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 57"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 58"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 59"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 60"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 61"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 62"></div>
+                    </div>
+                    <div class="box-c-8 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm 63"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 64"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 65"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 66"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 67"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-b-2  shadow-black shadow-sm mt-[2px] 68"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 69"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 70"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-400  shadow-black shadow-sm mt-[2px] 71"></div>
+                    </div>
+                    <div class="box-c-9 mr-[2px]">
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm 72"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 73"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 74"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 75"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 76"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 border-b-2 shadow-black shadow-sm mt-[2px] 77"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 78"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 79"></div>
+                        <div class="md:w-[48px] md:h-[48px] w-[33px] h-[33px] bg-white rounded-[4px] border-gray-600 border-r-2 shadow-black shadow-sm mt-[2px] 80"></div>
+                    </div>
+                </div>
+                <!-- rightpart -->
+                <div class="content">
+                    <div class="flex flex-col justify-center items-center space-x-1 w-full">
+                        <div class="rightpart flex justify-center items-center h-[50px] w-full ml-3">
+                            <p class="text-[12px] md:text-sm w-[70px] mt-1"  >Set Delay</p>
+                            <svg class="MuiSvgIcon-root w-[20px] pt-1 mt-[2px]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M15.5 5H11l5 7-5 7h4.5l5-7z"></path>
+                                <path d="M8.5 5H4l5 7-5 7h4.5l5-7z"></path>
+                            </svg>      
+                            <div class="pt-1 p-3 mt-[43px] flex flex-col w-full">
+                                <input type="range" name="range" min="0" max="100" step="1" class="slider">
+                                <div class="flex justify-between mt-2 text-sm ">
+                                    <p class="text-sm">Max</p>
+                                    <p class="text-sm">Min</p>
+                                </div>
+                            </div> 
+                        </div>
+                        
+                        <div class="mt-20 text-sm flex justify-around w-full lg:w-[110%] text-blue-700 flex-col gap-y-5  md:flex-row">
+                            <button  class="easy p-3 pl-2 pr-2 lg:p-3 lg:pl-4 lg:pr-4 border-[1px] border-blue-900 rounded-md ">Load Sudoku: Easy</button>
+                            <button  class="medium p-3 pl-2 pr-2 lg:p-3 lg:pl-4 lg:pr-4 border-[1px] border-blue-900 rounded-md ">Load Sudoku: Medium</button>
+                            <button  class="hard p-3 pl-2 pr-2 lg:p-3 lg:pl-4 lg:pr-4 border-[1px] border-blue-900 rounded-md">Load Sudoku: Hard</button>
+                        </div>
+                        <div class="mt-10 md:mt-20 ">
+                            <button class="solveSudoku p-3  pl-20 pr-20 bg-blue-400 rounded-md text-white">Solve</button>
+                            <!-- <button class="bg-red-600 text-sm px-2 h-6 self-center rounded-md text-white pb-2 stop">Stop</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
